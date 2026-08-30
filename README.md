@@ -1,82 +1,163 @@
-# CommonLibrary.NET is a helper .NET library targeting .NET 10.0 and provides reusable utilities for binary data manipulation,
-# graphical user interfaces (GUI Message Window), web browser controlling, Windows application management, 
-# and custom exceptions. 
+# **CommonLibrary.NET** is a versatile .NET utility library designed to simplify bitwise manipulations,
+# binary file operations, Windows application management, browser interaction, and GUI dialog creation.
 
-# Project Structure & Namespaces:
-The repository structure corresponds directly to the available namespaces and classes:
+---
 
-CommonLibrary.NET
-├── BinaryManager
-│   ├── Binary.cs
-│   ├── BitOperations.cs
-│   └── BitState.cs
-├── Exceptions
-│   └── FileException.cs
-├── GUI
-│   ├── MessageWindow.cs
-│   ├── MessageWindowResult.cs
-│   └── MessageWindowType.cs
-├── Web
-│   └── WebBrowser.cs
-└── WindowsAppManager
-    └── WindowsApps.cs
+## 📑 Table of Contents
 
-# Classes & Namespaces Overview. 
+- [Features](#-features)
+- [Project Architecture](#-project-architecture)
+- [Installation](#-installation)
+- [Usage Examples](#-usage-examples)
+  - [Binary Operations](#1-binary-operations)
+  - [Bitwise Operations](#2-bitwise-operations)
+  - [GUI & Dialogs](#3-gui--dialogs)
+  - [Web Navigation](#4-web-navigation)
+  - [Windows App Launcher](#5-windows-app-launcher)
+  - [Custom Exceptions](#6-custom-exceptions)
+- [Unit Testing](#-unit-testing)
+- [License](#-license)
 
-# 1. CommonLibrary.NET.BinaryManager provides utilities for low-level byte and bit manipulation:  
--> Binary (in Binary.cs) – Core class for encapsulating and processing binary data and byte arrays. 
--> BitOperations (in BitOperations.cs) – Static helper methods for performing 
-    bitwise operations (AND, OR, bit shifts, reading/writing individual bits).  
--> BitState (in BitState.cs) – Enum/structure representing a bit state (On/Off or 1/0).
+---
 
-# 2. CommonLibrary.NET.GUI contains GUI components for displaying message dialogs and handling user responses:
--> MessageWindow (in MessageWindow.cs) – Class for displaying pop-up windows and custom dialog messages. 
--> MessageWindowResult (in MessageWindowResult.cs) – Enum for dialog response outcomes (e.g., OK, Cancel, Yes, No).
--> MessageWindowType (in MessageWindowType.cs) – Enum for defining dialog types (e.g., Info, Warning, Error, Question). 
+## 🚀 Features
 
-# 3. CommonLibrary.NET.Web rrovides abstractions for web components and web navigation:
--> WebBrowser (in WebBrowser.cs) – Class for embedding, navigating, and loading web pages or web content.
+* **⚡ Binary Manipulation:** Convert raw text into binary `.bin` files, read raw bytes sequentially, 
+       and print formatted binary representations.
 
-# 4. CommonLibrary.NET.WindowsAppManager enables interaction with the Windows OS and external processes:
--> WindowsApps (in WindowsApps.cs) – Manager for launching and closing external Windows applications and processes.  
+* **🔢 Advanced Bit Operations:** Change individual bits (`TurnOn`, `TurnOff`, `Switch`) and inspect specific bit statuses (`IsActiveBit`)
+       using generic constraints.
 
-# 5. CommonLibrary.NET.Exceptions:
--> FileException (in FileException.cs) – Custom exception class for handling file system and file IO errors. 
+* **🖥️ Native GUI Dialogs:** Show message popups or question dialogs via Windows API (`MessageBoxW`) 
+       with strongly-typed responses and icons.
 
-# Code Examples =>
+* **🌐 Cross-Platform Web Operations:** Open system browsers dynamically across Windows, Linux, and OSX.
 
-# Bit Operations (CommonLibrary.NET.BinaryManager):
+* **⚙️ Windows Utilities:** Launch built-in OS tools (Calculator, Notepad, Task Manager, Command Prompt, PowerShell, Registry Editor) 
+       with single-method calls.
 
-C# code //=>
+* **⚠️ File Exceptions:** Guard helper methods and custom exceptions to prevent invalid file or path operations.
+
+---
+
+## 📁 Project Architecture
+
+CommonLibrary.NET/
+├── 📁 BinaryManager/
+│   ├── 📄 Binary.cs           # File parsing, binary string printing, and binary file creation
+│   ├── 📄 BitOperations.cs    # Generic bitwise manipulation (ChangeBitAt, IsActiveBit)
+│   └── 📄 BitState.cs         # BitState enumeration (TurnOn, TurnOff, Switch)
+├── 📁 Exceptions/
+│   └── 📄 FileException.cs    # Custom file-system exception and static guard methods
+├── 📁 GUI/
+│   ├── 📄 MessageWindow.cs         # Windows dialog wrapper using user32.dll
+│   ├── 📄 MessageWindowResult.cs   # Result enumeration (ResultOK, ResultYes, ResultNo, etc.)
+│   └── 📄 MessageWindowType.cs     # Window options and icon combination flags
+├── 📁 Web/
+│   └── 📄 WebBrowser.cs      # Cross-platform default browser launcher
+└── 📁 WindowsAppManager/
+    └── 📄 WindowsApps.cs     # Static app launcher methods for Windows OS
+
+⚙️ Installation
+Targeting .NET 10.0.
+Add the project reference to your application(compiled DLL) or build the Release configuration:
+
+Bash
+# Clone the repository and build the library
+git clone [https://github.com/your-username/CommonLibrary.NET.git](https://github.com/your-username/CommonLibrary.NET.git)
+dotnet build CommonLibrary.NET/CommonLibrary.NET.csproj -c Release
+
+After the build the DLL can be found in the Release folder.
+
+# Direct use of compiled DLL
+Download the compiled ready to use DLL from folder CommonLibrary.NET.DLL in the repository.
+
+# 💡 Usage Examples
+
+# 1. Binary Operations:
 
 using CommonLibrary.NET.BinaryManager;
 
-// Check and set bit states
-bool isSet = BitOperations.IsActiveBit(number: 0b0000_1000, position: 3);
-byte result = BitOperations.ChangeBitAt(number: 0b0000_0000, position: 1, bitState: BitState.TurnOn);
-GUI Dialogs (CommonLibrary.NET.GUI)C#using CommonLibrary.NET.GUI;
+// Create a .bin file from plain text
+Binary.CreateBinaryFormText("Hello World!", @"C:\ExportDirectory");
 
-// Display an error popup message
-MessageWindowResult userResponse = MessageWindow.Show(
-    message: "An issue occurred while loading the file.",
-    title: "Error",
-    windowType: MessageWindowType.WithButtonOKAndErrorIcon
+// Read and print raw binary content to console (returns total byte count)
+int totalBytes = Binary.PrintContentAndGetBytesCount(@"C:\ExportDirectory\NewBinaryFile.bin");
+
+// Load raw byte list from a file
+List<byte> bytes = Binary.LoadBinary(@"C:\ExportDirectory\NewBinaryFile.bin");
+
+# 2. Bitwise Operations:
+
+using CommonLibrary.NET.BinaryManager;
+
+byte sampleNumber = 0b0000_0100; // Value: 4
+
+// Check if bit at index 2 is active (returns true)
+bool isActive = BitOperations.IsActiveBit(sampleNumber, 2);
+
+// Turn on bit at position 0 (Result: 0b0000_0101)
+byte turnedOn = BitOperations.ChangeBitAt(sampleNumber, 0, BitState.TurnOn);
+
+// Switch bit state at position 2 (Result: 0b0000_0000)
+byte switched = BitOperations.ChangeBitAt(sampleNumber, 2, BitState.Switch);
+
+# 3. GUI & Dialogs:
+
+using CommonLibrary.NET.GUI;
+
+// Show a simple information message
+MessageWindow.ShowMessage("Operation completed successfully!");
+
+// Ask a question with Yes/No response
+MessageWindowResult answer = MessageWindow.AskQuestion("Do you want to save changes?");
+if (answer == MessageWindowResult.ResultYes)
+{
+    // logic...
+}
+
+// Custom window with specific title and warning icon
+MessageWindowResult customResult = MessageWindow.Show(
+    message: "Low disk space warning!",
+    title: "System Warning",
+    windowType: MessageWindowType.WithButtonOKAndWarningIcon
 );
 
-# Application Management (CommonLibrary.NET.WindowsAppManager)C#using CommonLibrary.NET.WindowsAppManager;
+# 4. Web Navigation
 
-C# code =>
+using CommonLibrary.NET.Web;
 
-// Launch a Windows applications
-WindowsApps.OpenPowershell();
-WindowsApps.OpenControlPanel();
+// Open default browser to Google
+WebBrowser.Open();
 
-# Unit Testing (CommonLibraryTests)The repository includes test coverage located in CommonLibraryTests: 
+// Open browser to a custom URL
+WebBrowser.OpenAndNavigate("[https://github.com](https://github.com)");
 
-- BinaryTests.cs & BitOperationsTests.cs – Binary operations tests. 
-- MessageWindowTests.cs – GUI window tests. 
-- WebBrowserTests.cs – Web integration tests.  
-- WindowsAppsTests.cs – Process management tests.  
+# 5. Windows App Launcher
 
-# Run all tests via CLI: dotnet test CommonLibraryTests/CommonLibraryTests.csproj
-# LicenseThis project is licensed under the terms defined in the LICENSE.txt file.
+using CommonLibrary.NET.WindowsAppManager;
+
+// Launch built-in applications
+WindowsApps.OpenCalculator();
+WindowsApps.OpenNotepad();
+WindowsApps.OpenTerminal();
+
+// Open File Explorer at a specific directory
+WindowsApps.OpenFileManager(@"C:\Windows");
+
+# 6. Custom Exceptions
+
+using CommonLibrary.NET.Exceptions;
+
+// Validate paths using built-in guards
+FileException.ThrowIfFilePathIsNull(filePath);
+FileException.ThrowIfFileDoesNotExists(filePath);
+
+# 🧪 Unit Testing
+To run the full test suite included in CommonLibraryTests:
+
+Bash
+dotnet test CommonLibraryTests/CommonLibraryTests.csproj
+
+📜 License
+This project is licensed under the terms defined in the LICENSE.txt file

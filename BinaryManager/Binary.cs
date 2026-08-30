@@ -133,7 +133,7 @@ namespace CommonLibrary.NET.BinaryManager
         ///  The number of the printed bytes.
         /// </returns>
         [MethodImpl(MethodImplOptions.PreserveSig)]
-        public static int PrintContentAndGetBitsCount(string filePath)
+        public static int PrintContentAndGetBytesCount(string filePath)
         {     
             FileException.ThrowIfFilePathIsNull(filePath); // Checks the file path for NULL and throw and FileException if true.   
             FileException.ThrowIfFileDoesNotExists(filePath); // Checks if the file exists and throw and FileException if not.
