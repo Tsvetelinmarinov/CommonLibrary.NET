@@ -57,7 +57,7 @@ CommonLibrary.NET/
 │   └── 📄 WebBrowser.cs
 └── 📁 WindowsAppManager/
     └── 📄 WindowsApps.cs
-
+```
 ⚙️ Installation
 Targeting .NET 10.0.
 Add the project reference to your application(compiled DLL) or build the Release configuration:
