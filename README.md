@@ -59,7 +59,7 @@ CommonLibrary.NET/
     └── 📄 WindowsApps.cs
 ```
 ⚙️ Installation
-Targeting .NET 10.0.\n
+Targeting .NET 10.0.
 Add the project reference to your application(compiled DLL) or build the Release configuration.
 
 # Clone the repository and build the library
