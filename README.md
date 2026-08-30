@@ -59,10 +59,9 @@ CommonLibrary.NET/
     └── 📄 WindowsApps.cs
 ```
 ⚙️ Installation
-Targeting .NET 10.0.
-Add the project reference to your application(compiled DLL) or build the Release configuration:
+Targeting .NET 10.0.\n
+Add the project reference to your application(compiled DLL) or build the Release configuration.
 
-Bash
 # Clone the repository and build the library
 git clone [https://github.com/your-username/CommonLibrary.NET.git](https://github.com/your-username/CommonLibrary.NET.git)
 dotnet build CommonLibrary.NET/CommonLibrary.NET.csproj -c Release
