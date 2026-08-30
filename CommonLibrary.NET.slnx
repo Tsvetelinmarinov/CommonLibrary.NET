@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="../CommonLibraryTests/CommonLibraryTests.csproj" Id="d801af48-0d1e-44d5-92fa-976ef0273964" />
+  <Project Path="CommonLibrary.NET.csproj" />
+</Solution>

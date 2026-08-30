@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+	<DefineConstants Condition="'$(COMPUTERNAME)' == 'Dell'">$(DefineConstants);LOCAL_COMPUTER_WITH_OLLAMA_TERMINAL</DefineConstants>
+	<AssemblyTitle>CommonLibrary.NET</AssemblyTitle>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.AI" Version="10.9.0" />
+    <PackageReference Include="OllamaSharp" Version="5.4.30" />
+  </ItemGroup>
+
+</Project>
