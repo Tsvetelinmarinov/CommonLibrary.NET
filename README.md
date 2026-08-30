@@ -1,5 +1,4 @@
-# **CommonLibrary.NET** is a versatile .NET utility library designed to simplify bitwise manipulations,
-# binary file operations, Windows application management, browser interaction, and GUI dialog creation.
+# **CommonLibrary.NET** is a versatile .NET utility library designed to simplify bitwise manipulations, binary file operations, Windows application management, browser interaction, and GUI dialog creation.
 
 ---
 
