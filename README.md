@@ -42,21 +42,22 @@
 
 ## 📁 Project Architecture
 
+```text
 CommonLibrary.NET/
 ├── 📁 BinaryManager/
-│   ├── 📄 Binary.cs           # File parsing, binary string printing, and binary file creation
-│   ├── 📄 BitOperations.cs    # Generic bitwise manipulation (ChangeBitAt, IsActiveBit)
-│   └── 📄 BitState.cs         # BitState enumeration (TurnOn, TurnOff, Switch)
+│   ├── 📄 Binary.cs
+│   ├── 📄 BitOperations.cs
+│   └── 📄 BitState.cs
 ├── 📁 Exceptions/
-│   └── 📄 FileException.cs    # Custom file-system exception and static guard methods
+│   └── 📄 FileException.cs
 ├── 📁 GUI/
-│   ├── 📄 MessageWindow.cs         # Windows dialog wrapper using user32.dll
-│   ├── 📄 MessageWindowResult.cs   # Result enumeration (ResultOK, ResultYes, ResultNo, etc.)
-│   └── 📄 MessageWindowType.cs     # Window options and icon combination flags
+│   ├── 📄 MessageWindow.cs
+│   ├── 📄 MessageWindowResult.cs
+│   └── 📄 MessageWindowType.cs
 ├── 📁 Web/
-│   └── 📄 WebBrowser.cs      # Cross-platform default browser launcher
+│   └── 📄 WebBrowser.cs
 └── 📁 WindowsAppManager/
-    └── 📄 WindowsApps.cs     # Static app launcher methods for Windows OS
+    └── 📄 WindowsApps.cs
 
 ⚙️ Installation
 Targeting .NET 10.0.
