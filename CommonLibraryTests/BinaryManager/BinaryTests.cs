@@ -1,6 +1,8 @@
 ﻿namespace CommonLibraryTests.BinaryManager
 {
     using CommonLibraryTests.BinaryManager.MockObjects;
+    using NUnit.Framework;
+    using System.IO;
     using static CommonLibrary.NET.BinaryManager.Binary;
 
     [TestFixture]
@@ -9,7 +11,7 @@
         [Test]
         public void Test_PrintContentPrintsCurrentNumberOfBytesFormTestFile()
         {
-            int bytes = PrintContentAndGetBitsCount(Fake.FileLocation);
+            int bytes = PrintContentAndGetBytesCount(Fake.FileLocation);
             int fakeFileLength = File.ReadAllBytes(Fake.FileLocation).Length;
 
             Assert.ThatAsync(async () => bytes, Is.EqualTo(fakeFileLength));

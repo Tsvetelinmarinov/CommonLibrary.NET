@@ -1,5 +1,6 @@
 ﻿namespace CommonLibraryTests.BinaryManager;
 
+using NUnit.Framework;
 using static CommonLibrary.NET.BinaryManager.BitOperations;
 
 /// <summary>
