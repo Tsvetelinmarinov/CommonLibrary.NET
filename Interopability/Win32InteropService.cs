@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 namespace CommonLibrary.Interoperability
@@ -10,7 +9,7 @@ namespace CommonLibrary.Interoperability
     ///  unmanaged(Low-level C or C++) code.
     ///  Provides the base C functionality for some of the methods in the library.
     /// </summary>
-    internal partial class Win32InteropService
+    public static class Win32InteropService
     {
         #region C# Wrapper Methods For Win32 API Functions
 
@@ -27,13 +26,19 @@ namespace CommonLibrary.Interoperability
 
         // Encapsulates safety the call to the unmanaged Win32 API C function printf.
         internal static int PrintF(string text)
-        {
-            return __C_METHOD_printf__(text);
-        }
+            => __C_METHOD_printf__(text);
+
+        // Encapsulates safety the call to the unmanaged Win32 API C function scanf.
+        internal static int ScanF(string pattern, out string outputParameter)
+            => __C_METHOD_scanf__(pattern, out outputParameter);
 
         #endregion
 
         #region Win32 API Connection And P/Invoke Logic
+
+        // SYSLIB1054: Use 'LibraryImportAttribute' instead of 'DllImportAttribute'
+        // to generate P/Invoke marshalling code at compile time.
+#pragma warning disable SYSLIB1054
 
         /// <summary>
         ///  Shows classical Windows dialog window with a message, title, and buttons.
@@ -50,14 +55,15 @@ namespace CommonLibrary.Interoperability
         /// <returns>
         ///  The result of the dialog window.
         /// </returns>
-        [LibraryImport(
+        [DllImport(
             "user32.dll",
             EntryPoint = "MessageBoxW",
-            StringMarshalling = StringMarshalling.Utf8,
-            SetLastError = true
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            CallingConvention = CallingConvention.Cdecl
         )]
-        [UnmanagedCallConv(CallConvs =[typeof(CallConvCdecl)])]
-        private static partial int __C_METHOD_MessageBoxW__(
+
+        private static extern int __C_METHOD_MessageBoxW__(
             IntPtr parentWindowHandle, 
             string message, 
             string title, 
@@ -73,15 +79,39 @@ namespace CommonLibrary.Interoperability
         /// <returns>
         ///  The number of characters printed.
         /// </returns>
-        [LibraryImport(
-            "msvcrt.dll",
-            EntryPoint = "printf", 
-            SetLastError = true, 
-            StringMarshalling = StringMarshalling.Utf8
-        )]
-        [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
-        private static partial int __C_METHOD_printf__(string text);
+        [DllImport(
+             "msvcrt.dll",
+             EntryPoint = "printf", 
+             CharSet = CharSet.Unicode,
+             SetLastError = true,
+             CallingConvention = CallingConvention.Cdecl
+         )]
+        private static extern int __C_METHOD_printf__(string text);
 
+        /// <summary>
+        ///  Scans the input from the console according to the specified pattern 
+        ///  and stores the result in the output parameter.
+        /// </summary>
+        /// <param name="pattern">
+        ///  The format string that specifies how to interpret the input.
+        /// </param>
+        /// <param name="outputParameter">
+        ///  The parameter to store the result.
+        /// </param>
+        /// <returns>
+        ///  The number of characters read.
+        /// </returns>
+        [DllImport(
+            "msvcrt.dll",
+            EntryPoint = "scanf",
+            CharSet = CharSet.Unicode,
+            SetLastError = true,
+            CallingConvention = CallingConvention.Cdecl
+        )]
+        private static extern int __C_METHOD_scanf__(string pattern, out string outputParameter);
+
+#pragma warning restore SYSLIB1054 // Use 'LibraryImportAttribute' instead of 'DllImportAttribute' 
+                                  // to generate P/Invoke marshalling code at compile time.
         #endregion
     }
 }
