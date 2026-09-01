@@ -1,4 +1,4 @@
-﻿using CommonLibrary.NET.Exceptions;
+﻿using CommonLibrary.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.IO;
