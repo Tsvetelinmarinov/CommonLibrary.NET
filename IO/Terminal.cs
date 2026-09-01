@@ -1,4 +1,4 @@
-﻿namespace CommonLibrary.NET.IO
+﻿namespace CommonLibrary.IO
 {
     using CommonLibrary.Interoperability;
 
