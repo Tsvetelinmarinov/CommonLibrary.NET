@@ -1,4 +1,4 @@
-﻿namespace CommonLibrary.NET.GUI
+﻿namespace CommonLibrary.GUI
 {
     /// <summary>
     /// Specifies the returned result from the MessageBoxW() C function.

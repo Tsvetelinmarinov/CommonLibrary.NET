@@ -5,7 +5,7 @@ using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text;
 
-namespace CommonLibrary.NET.BinaryManager
+namespace CommonLibrary.BinaryManager
 {
     /// <summary>
     ///  Provides set of static methods for manipulating(Creating, editing, opening ...) a binary file.

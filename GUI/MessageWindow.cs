@@ -1,9 +1,9 @@
-﻿using CommonLibrary.NET.Interoperability;
+﻿using CommonLibrary.Interoperability;
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace CommonLibrary.NET.GUI
+namespace CommonLibrary.GUI
 {
     /// <summary>
     ///  Provides method for opening a dialog window.

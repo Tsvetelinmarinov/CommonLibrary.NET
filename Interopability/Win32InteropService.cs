@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace CommonLibrary.NET.Interoperability
+namespace CommonLibrary.Interoperability
 {
     /// <summary>
     ///  Wraps and interacts with Win32 API(such as user32.dll, kernel32.dll, gdi32.dll etc...).

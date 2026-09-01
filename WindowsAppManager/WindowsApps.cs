@@ -1,7 +1,7 @@
-﻿namespace CommonLibrary.NET.WindowsAppManager
+﻿namespace CommonLibrary.WindowsAppManager
 {
-    using CommonLibrary.NET.Exceptions;
-    using CommonLibrary.NET.GUI;
+    using CommonLibrary.Exceptions;
+    using CommonLibrary.GUI;
     using System;
     using System.Diagnostics;
     using System.IO;

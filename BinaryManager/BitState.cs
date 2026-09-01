@@ -1,4 +1,4 @@
-﻿namespace CommonLibrary.NET.BinaryManager
+﻿namespace CommonLibrary.BinaryManager
 {
     /// <summary>
     ///  Describes the two possible states of a bit - 0(turned off) and 1(turned on).

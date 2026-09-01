@@ -1,6 +1,6 @@
 ﻿namespace CommonLibrary.NET.IO
 {
-    using CommonLibrary.NET.Interoperability;
+    using CommonLibrary.Interoperability;
 
     /// <summary>
     ///  Provides low-level console input/output functionality.

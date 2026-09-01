@@ -1,4 +1,4 @@
-﻿namespace CommonLibrary.NET.GUI
+﻿namespace CommonLibrary.GUI
 {
     /// <summary>
     ///  Specifies the type of the <see cref="MessageWindow"/>.

@@ -1,7 +1,7 @@
 ﻿using System.Numerics;
 using System.Runtime.CompilerServices;
 
-namespace CommonLibrary.NET.BinaryManager
+namespace CommonLibrary.BinaryManager
 {
     /// <summary>
     ///  Provides set of static methods for manipulating the bits of an number.

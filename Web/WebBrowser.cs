@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
-namespace CommonLibrary.NET.Web
+namespace CommonLibrary.Web
 {
     /// <summary>
     ///  Provides cross-platform methods for launching the default web browser of the machine.
