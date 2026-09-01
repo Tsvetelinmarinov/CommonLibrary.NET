@@ -1,4 +1,4 @@
-﻿using CommonLibrary.NET.Interop;
+﻿using CommonLibrary.NET.Interoperability;
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;

@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace CommonLibrary.NET.Interop
+namespace CommonLibrary.NET.Interoperability
 {
     /// <summary>
     ///  Wraps and interacts with Win32 API(such as user32.dll, kernel32.dll, gdi32.dll etc...).
@@ -10,7 +11,7 @@ namespace CommonLibrary.NET.Interop
     ///  unmanaged(Low-level C or C++) code.
     ///  Provides the base C functionality for some of the methods in the library.
     /// </summary>
-    internal partial class Win32InteropService 
+    internal partial class Win32InteropService
     {
         #region C# Wrapper Methods For Win32 API Functions
 
@@ -23,6 +24,12 @@ namespace CommonLibrary.NET.Interop
                 title,
                 windowType
             );
+        }
+
+        // Encapsulates safety the call to the unmanaged Win32 API C function printf.
+        internal static int PrintF(string text)
+        {
+            return __C_METHOD_printf__(text);
         }
 
         #endregion
@@ -50,13 +57,31 @@ namespace CommonLibrary.NET.Interop
             StringMarshalling = StringMarshalling.Utf8,
             SetLastError = true
         )]
-        [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+        [UnmanagedCallConv(CallConvs =[typeof(CallConvCdecl)])]
         private static partial int __C_METHOD_MessageBoxW__(
             IntPtr parentWindowHandle, 
             string message, 
             string title, 
             uint windowType
         );
+
+        /// <summary>
+        ///  Prints the text in the console.
+        /// </summary>
+        /// <param name="text">
+        ///  The text to be printed.
+        /// </param>
+        /// <returns>
+        ///  The number of characters printed.
+        /// </returns>
+        [LibraryImport(
+            "msvcrt.dll",
+            EntryPoint = "printf", 
+            SetLastError = true, 
+            StringMarshalling = StringMarshalling.Utf8
+        )]
+        [UnmanagedCallConv(CallConvs = [typeof(CallConvCdecl)])]
+        private static partial int __C_METHOD_printf__(string text);
 
         #endregion
     }

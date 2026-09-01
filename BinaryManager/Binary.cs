@@ -1,13 +1,8 @@
 ﻿using CommonLibrary.NET.Exceptions;
-using CommonLibrary.NET.GUI;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
-using System.Numerics;
-using System.Reflection.Metadata;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Text;
 
 namespace CommonLibrary.NET.BinaryManager
@@ -142,7 +137,7 @@ namespace CommonLibrary.NET.BinaryManager
             // too large that will fill all the memory.
             using FileStream binaryFile = File.OpenRead(filePath!);
 
-            Console.ForegroundColor = ConsoleColor.Green; // Green binary code.
+            System.Console.ForegroundColor = ConsoleColor.Green; // Green binary code.
             int byteCounter = 0; // Total bytes.
 
             // Reads the file byte-by-byte.
