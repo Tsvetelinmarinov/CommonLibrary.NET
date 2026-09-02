@@ -3,7 +3,7 @@ using CommonLibrary.Exceptions.ErrorMessages;
 using System;
 using System.IO;
 
-namespace CommonLibrary.NET.Exceptions.ExceptionsThrowHelper
+namespace CommonLibrary.Exceptions.ExceptionsThrowHelper
 {
     //
     // Provides methods for throwing exceptions in a more efficient way with check first.

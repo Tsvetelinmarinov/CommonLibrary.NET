@@ -1,5 +1,5 @@
 ﻿using CommonLibrary.Interoperability;
-using CommonLibrary.NET.Exceptions.ExceptionsThrowHelper;
+using CommonLibrary.Exceptions.ExceptionsThrowHelper;
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
