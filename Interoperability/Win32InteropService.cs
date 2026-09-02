@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 
@@ -87,27 +88,6 @@ namespace CommonLibrary.Interoperability
              CallingConvention = CallingConvention.Cdecl
          )]
         private static extern int __C_METHOD_printf__(string text);
-
-        /// <summary>
-        ///  Reads formatted input from the console.
-        /// </summary>
-        /// <param name="format">
-        ///  The format string that specifies how to interpret the input.
-        /// </param>
-        /// <param name="outputBuffer">
-        ///  The buffer to store the parsed input.
-        /// </param>
-        /// <returns>
-        ///  The number of input items successfully parsed.
-        /// </returns>
-        [DllImport(
-            "msvcrt.dll",
-            EntryPoint = "scanf",
-            CharSet = CharSet.Ansi,
-            SetLastError = true,
-            CallingConvention = CallingConvention.Cdecl
-        )]
-        private static extern int __C_METHOD_scanf__(string format, __arglist/*... or va_list -> variadic list in C */);
 
 #pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
 #pragma warning restore SYSLIB1054 // Use 'LibraryImportAttribute' instead of 'DllImportAttribute' 
