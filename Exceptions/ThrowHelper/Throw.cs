@@ -7,16 +7,16 @@ namespace CommonLibrary.Exceptions.ExceptionsThrowHelper
 {
     //
     // Provides methods for throwing exceptions in a more efficient way with check first.
-    // This class is used to reduce the size of the data type(class) code with combined
-    // checks and throw statements.
-    // Each method make a check first, then throws an exception if the check fails.
+    // When creating a data type, this class is used to reduce the size of the data type(class)
+    // code with combined checks and throw statements.
+    // Each method make a check first, then throws an exception if the check is how is expected.
     //
     // Example:
     // void OpenFile(string filePath)
     // {
-    //    if (string.IsNull(filePath))
+    //    if (string.IsNullOrWhiteSpace(filePath))
     //    {
-    //        throw new FileException("File path cannot be null!");
+    //        throw new FileException("File path cannot be null or whitespace!");
     //    }
     //     
     //    if (File.Exists(filePath) is false)
