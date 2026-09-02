@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace CommonLibrary.Interoperability
 {
@@ -9,7 +10,8 @@ namespace CommonLibrary.Interoperability
     ///  unmanaged(Low-level C or C++) code.
     ///  Provides the base C functionality for some of the methods in the library.
     /// </summary>
-    public static class Win32InteropService
+    [SupportedOSPlatform("windows")]
+    internal static class Win32InteropService
     {
         #region C# Wrapper Methods For Win32 API Functions
 
@@ -28,13 +30,9 @@ namespace CommonLibrary.Interoperability
         internal static int PrintF(string text)
             => __C_METHOD_printf__(text);
 
-        // Encapsulates safety the call to the unmanaged Win32 API C function scanf.
-        internal static int ScanF(string pattern, out string outputParameter)
-            => __C_METHOD_scanf__(pattern, out outputParameter);
-
         #endregion
 
-        #region Win32 API Connection And P/Invoke Logic
+        #region P/Invoke Logic to Win32 APIs
 
         // SYSLIB1054: Use 'LibraryImportAttribute' instead of 'DllImportAttribute'
         // to generate P/Invoke marshalling code at compile time.
@@ -87,28 +85,6 @@ namespace CommonLibrary.Interoperability
              CallingConvention = CallingConvention.Cdecl
          )]
         private static extern int __C_METHOD_printf__(string text);
-
-        /// <summary>
-        ///  Scans the input from the console according to the specified pattern 
-        ///  and stores the result in the output parameter.
-        /// </summary>
-        /// <param name="pattern">
-        ///  The format string that specifies how to interpret the input.
-        /// </param>
-        /// <param name="outputParameter">
-        ///  The parameter to store the result.
-        /// </param>
-        /// <returns>
-        ///  The number of characters read.
-        /// </returns>
-        [DllImport(
-            "msvcrt.dll",
-            EntryPoint = "scanf",
-            CharSet = CharSet.Unicode,
-            SetLastError = true,
-            CallingConvention = CallingConvention.Cdecl
-        )]
-        private static extern int __C_METHOD_scanf__(string pattern, out string outputParameter);
 
 #pragma warning restore SYSLIB1054 // Use 'LibraryImportAttribute' instead of 'DllImportAttribute' 
                                   // to generate P/Invoke marshalling code at compile time.

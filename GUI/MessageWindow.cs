@@ -1,13 +1,16 @@
 ﻿using CommonLibrary.Interoperability;
+using CommonLibrary.NET.Exceptions.ExceptionsThrowHelper;
 using System;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.Versioning;
 
 namespace CommonLibrary.GUI
 {
     /// <summary>
     ///  Provides method for opening a dialog window.
     /// </summary>
+    [SupportedOSPlatform("windows")]
     public class MessageWindow
     {
         // Constants for the cases when no message or question is specified by the endpoint user.
@@ -17,10 +20,6 @@ namespace CommonLibrary.GUI
         // Default name of the window, if the same is not specified.
         private static readonly string s_DefaultWindowTitle = "Message Window";
 
-        // Default error message when the platform is not supported.
-        private static readonly string s_PlatformIsNotSupportedError
-            = "The type MessageWindow is only supported on Windows OS.";
-
 
         /// <summary>
         ///  Shows message in a classical Windows dialog window.
@@ -29,14 +28,14 @@ namespace CommonLibrary.GUI
         [MethodImpl(MethodImplOptions.PreserveSig)]
         public static void ShowMessage(string message)
         {
-            ThrowExceptionIfNotWindows();
+            Throw.IfNotWindows(); //=> Platform depended data type(MessageWindow)! Only Windows OS is supported.
             message ??= s_NoMessageText;
 
             _ = Win32InteropService.MessageBoxW(
                 IntPtr.Zero, // null pointer, so the dialog will be attached to the current window.
                 message,
                 s_DefaultWindowTitle,
-                (uint) MessageWindowType.WithButtonOK
+                (uint)MessageWindowType.WithButtonOK
             );
         }
 
@@ -50,7 +49,7 @@ namespace CommonLibrary.GUI
         [MethodImpl(MethodImplOptions.PreserveSig)]
         public static MessageWindowResult AskQuestion(string question)
         {
-            ThrowExceptionIfNotWindows();
+            Throw.IfNotWindows();
             question ??= s_NoQuestionText;
 
             return (MessageWindowResult) Win32InteropService.MessageBoxW(
@@ -75,7 +74,7 @@ namespace CommonLibrary.GUI
             string? title = null, 
             MessageWindowType? windowType = null
         ){
-            ThrowExceptionIfNotWindows(); //=> Platform depended data type(MessageWindow)! Only Windows OS is supported.
+            Throw.IfNotWindows(); //=> Platform depended data type(MessageWindow)! Only Windows OS is supported.
 
             message ??= s_NoMessageText;
             title ??= s_DefaultWindowTitle;
@@ -88,18 +87,5 @@ namespace CommonLibrary.GUI
                 (uint)windowType
             );
         }
-
-
-        #region Private Functionality
-
-        private static void ThrowExceptionIfNotWindows()
-        {
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) is false)
-            {
-                throw new PlatformNotSupportedException(s_PlatformIsNotSupportedError);
-            }
-        }
-
-        #endregion
     }
 }
