@@ -2,6 +2,7 @@
 {
     using CommonLibrary.Exceptions;
     using CommonLibrary.GUI;
+    using CommonLibrary.NET.GUI;
     using System;
     using System.Diagnostics;
     using System.IO;
@@ -131,7 +132,11 @@
 
             if (string.IsNullOrWhiteSpace(path))
             {
-                MessageWindow.ShowMessage($"The specified path is empty or is only white spaces!");
+                if (OperatingSystem.IsWindows())
+                {
+                    IWin32DialogWindow.ShowMessage($"The specified path is empty or is only white spaces!");
+                }
+
                 throw new FileException("The path is only white spaces!");
             }
 
@@ -146,7 +151,11 @@
             }
             else
             {
-                MessageWindow.ShowMessage($"The path: \"{path}\" does not exist or has invalid characters!");
+                if (OperatingSystem.IsWindows())
+                { 
+                    IWin32DialogWindow.ShowMessage($"The path: \"{path}\" does not exist or has invalid characters!");
+                }
+
                 throw new FileException($"The file at \"{path}\" does not exist!");
             }
         }
