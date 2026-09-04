@@ -1,7 +1,6 @@
-﻿using CommonLibrary.GUI;
-using System.Runtime.Versioning;
+﻿using System.Runtime.Versioning;
 
-namespace CommonLibrary.NET.GUI
+namespace CommonLibrary.GUI
 {
     /// <summary>
     ///  Provides a platform dependent data type for opening a classical Windows dialog window.

@@ -4,7 +4,7 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	<DefineConstants Condition="'$(COMPUTERNAME)' == 'Dell'">$(DefineConstants);LOCAL_COMPUTER_WITH_OLLAMA_TERMINAL</DefineConstants>
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
 	<AssemblyTitle>CommonLibrary.NET</AssemblyTitle>
   </PropertyGroup>
 

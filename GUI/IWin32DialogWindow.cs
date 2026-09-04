@@ -4,7 +4,7 @@ using CommonLibrary.Interoperability;
 using System;
 using System.Runtime.Versioning;
 
-namespace CommonLibrary.NET.GUI
+namespace CommonLibrary.GUI
 {
     /// <summary>
     ///  Functional Interface IWin32DialogWindow provides methods for 

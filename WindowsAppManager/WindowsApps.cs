@@ -2,7 +2,6 @@
 {
     using CommonLibrary.Exceptions;
     using CommonLibrary.GUI;
-    using CommonLibrary.NET.GUI;
     using System;
     using System.Diagnostics;
     using System.IO;

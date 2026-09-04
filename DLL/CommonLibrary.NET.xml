@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>CommonLibrary.NET</name>
+    </assembly>
+    <members>
+        <member name="T:CommonLibrary.BinaryManager.Binary">
+            <summary>
+             Provides set of static methods for manipulating(Creating, editing, opening ...) a binary file.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.BinaryManager.Binary.LoadBinary(System.String)">
+            <summary>
+             Loads the content of a binary file as list of bytes.
+            </summary>
+            <param name="binaryLocation">
+             The location of the binary file.
+            </param>
+            <returns>
+             List of bytes - the content of the binary file.
+            </returns>
+            <exception cref="T:CommonLibrary.Exceptions.FileException">
+             Thrown if the binary file does not exist, or his location is invalid.
+            </exception>
+        </member>
+        <member name="M:CommonLibrary.BinaryManager.Binary.CreateBinaryFormText(System.String,System.String)">
+            <summary>
+             Creates binary file(*.bin) with the bytes of the given text(code, file content etc...).
+            </summary>
+            <param name="text">
+             The text
+            </param>
+            <param name="binaryExportLocation">
+             The directory that the created binary file will be exported.
+             Only the directory name should be specified, without the file name and his extension.
+             The file name and extension are created by the method.
+            </param>
+        </member>
+        <member name="M:CommonLibrary.BinaryManager.Binary.PrintContentAndGetBytesCount(System.String)">
+            <summary>
+             Prints the bits of a binary file(.exe or .dll or .sys etc...) and returns
+             how exactly bytes has been printed.
+            </summary>
+            <param name="filePath">
+             The directory of the binary file.
+            </param>
+            <returns>
+             The number of the printed bytes.
+            </returns>
+        </member>
+        <member name="M:CommonLibrary.BinaryManager.Binary.GetBytesCount(System.String)">
+            <summary>
+             Gets the count of the bytes of the file.
+            </summary>
+            <param name="filePath">
+             The path to the file.
+            </param>
+            <returns>
+             The count of the file bytes as <see cref="T:System.Int64"/>.
+            </returns>
+        </member>
+        <member name="T:CommonLibrary.BinaryManager.BitOperations">
+            <summary>
+             Provides set of static methods for manipulating the bits of an number.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.BinaryManager.BitOperations.ChangeBitAt``1(``0,System.UInt32,CommonLibrary.BinaryManager.BitState)">
+            <summary>
+             Changes the bit at the specified position in the specified number with 
+             the specified value(0 or 1).
+            </summary>
+            <typeparam name="TNumber">
+              The data type of the number. Must be integer type.
+            </typeparam>
+            <param name="number">
+             The number.
+            </param>
+            <param name="position">
+             The position of the bit to change.
+            </param>
+            <param name="bitState">
+             The state of the bit. 
+             Flag <see cref="!:BitState.TunrOn"/> of the enumeration
+             <see cref="T:CommonLibrary.BinaryManager.BitState"/> specifies that the bit should receive value 1.
+             Flag <see cref="!:BitState.TunrOff"/> of the enumeration
+             <see cref="T:CommonLibrary.BinaryManager.BitState"/> specifies that the bit should receive value 0.
+             Flag <see cref="F:CommonLibrary.BinaryManager.BitState.Switch"/> of the enumeration
+             <see cref="T:CommonLibrary.BinaryManager.BitState"/> specifies that the bit should switch his value.
+            </param>
+            <returns>
+             The new number after the bit manipulating.
+            </returns>
+        </member>
+        <!-- Badly formed XML comment ignored for member "M:CommonLibrary.BinaryManager.BitOperations.IsActiveBit``1(``0,System.UInt32)" -->
+        <member name="T:CommonLibrary.BinaryManager.BitState">
+            <summary>
+             Describes the two possible states of a bit - 0(turned off) and 1(turned on).
+             That enumeration specifies the bit state in the methods of <see cref="T:CommonLibrary.BinaryManager.BitOperations"/> class.
+            </summary>
+        </member>
+        <member name="F:CommonLibrary.BinaryManager.BitState.TurnOff">
+            <summary>
+             Specifies that the bit should be turned off.
+            </summary>
+        </member>
+        <member name="F:CommonLibrary.BinaryManager.BitState.TurnOn">
+            <summary>
+             Specifies that the bit should be turned on.
+            </summary>
+        </member>
+        <member name="F:CommonLibrary.BinaryManager.BitState.Switch">
+            <summary>
+             Specifies that the bit should be switched -> if is 1 to 0 and if is 0 to 1.
+            </summary>
+        </member>
+        <member name="T:CommonLibrary.Exceptions.FileException">
+            <summary>
+             Throws when a file does not exist or the file path is invalid.
+            </summary>
+        </member>
+        <member name="P:CommonLibrary.Exceptions.FileException.ErrorMessage">
+            <summary>
+             Gets or sets the error message of the exception.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.Exceptions.FileException.#ctor(System.String)">
+            <summary>
+             Creates new instance of the FileException with the
+             specified optionally error message and parameter name.
+             Both parameters(errorMessage and parameterName) are optional.
+             If they are not specified, the default values will be used.
+            </summary>
+            <param name="errorMessage">The error message</param>
+            <param name="parameterName">The name of the parameter that causes the exception</param>
+        </member>
+        <member name="M:CommonLibrary.Exceptions.FileException.ThrowIfFilePathIsNull(System.String)">
+            <summary>
+             Throws new <see cref="T:CommonLibrary.Exceptions.FileException"/> when the file path specified 
+             with <paramref name="filePath"/> is null.
+            </summary>
+            <param name="filePath">
+             The file path.
+            </param>
+            <exception cref="T:CommonLibrary.Exceptions.FileException">
+             Throws when the file path is null.
+            </exception>
+        </member>
+        <member name="M:CommonLibrary.Exceptions.FileException.ThrowIfFileDoesNotExists(System.String)">
+            <summary>
+             Throws new FileException when the specified file with
+             the parameter <paramref name="filePath"/> does not exists.
+            </summary>
+            <param name="filePath">
+             The path to the file.
+            </param>
+        </member>
+        <member name="M:CommonLibrary.Exceptions.ExceptionsThrowHelper.Throw.FileException(System.String)">
+            <summary>
+             Throws a <see cref="M:CommonLibrary.Exceptions.ExceptionsThrowHelper.Throw.FileException(System.String)"/> if the provided file path is null, empty, contains only whitespace,
+             the file does not exist or the file path is invalid.
+            </summary>
+            <param name="filePath">
+             The file path to check. 
+            </param>
+        </member>
+        <member name="M:CommonLibrary.Exceptions.ExceptionsThrowHelper.Throw.IfNotWindows">
+            <summary>
+             Throws a <see cref="T:System.PlatformNotSupportedException"/> if the current operating system is not Windows.
+            </summary>
+        </member>
+        <member name="T:CommonLibrary.GUI.IWin32DialogWindow">
+            <summary>
+             Functional Interface IWin32DialogWindow provides methods for 
+             opening a classical Windows dialog window.
+             NOTE THAT: This interface is platform dependent and only works on Windows OS and
+             provides implementation for the static methods inside.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.GUI.IWin32DialogWindow.ShowMessage(System.String)">
+            <summary>
+             Shows message in a classical Windows dialog window.
+            </summary>
+            <param name="message">The message to be shown</param>
+        </member>
+        <member name="M:CommonLibrary.GUI.IWin32DialogWindow.AskQuestion(System.String)">
+            <summary>
+             Shows a message and waits for the response.
+            </summary>
+            <param name="questionMessage">The message to be shown</param>
+            <returns>
+             <see cref="T:CommonLibrary.GUI.MessageWindowResult"/> with the result from the window.
+            </returns>
+        </member>
+        <member name="M:CommonLibrary.GUI.IWin32DialogWindow.Show(System.String,System.String,System.Nullable{CommonLibrary.GUI.MessageWindowType})">
+            <summary>
+             Shows window with message and title, and waits for the response.
+            </summary>
+            <param name="message">The message to be shown</param>
+            <param name="title">The title of the window</param>
+            <param name="windowType">The type of the window</param>
+            <returns>
+             <see cref="T:CommonLibrary.GUI.MessageWindowResult"/> with the result from the dialog.
+            </returns>
+        </member>
+        <member name="T:CommonLibrary.GUI.MessageWindow">
+            <summary>
+             Provides a platform dependent data type for opening a classical Windows dialog window.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.GUI.MessageWindow.ShowMessage(System.String)">
+            <summary>
+             Shows message in a classical Windows dialog window.
+            </summary>
+            <param name="message">The message to be shown</param>
+        </member>
+        <member name="M:CommonLibrary.GUI.MessageWindow.AskQuestion(System.String)">
+            <summary>
+             Shows a message and waits for the response.
+            </summary>
+            <param name="questionMessage">The message to be shown</param>
+            <returns>
+             <see cref="T:CommonLibrary.GUI.MessageWindowResult"/> with the result from the window.
+            </returns>
+        </member>
+        <member name="M:CommonLibrary.GUI.MessageWindow.Show(System.String,System.String,CommonLibrary.GUI.MessageWindowType)">
+            <summary>
+             Shows window with message and title, and waits for the response.
+            </summary>
+            <param name="message">The message to be shown</param>
+            <param name="title">The title of the window</param>
+            <param name="windowType">The type of the window</param>
+            <returns>
+             <see cref="T:CommonLibrary.GUI.MessageWindowResult"/> with the result from the dialog.
+            </returns>
+        </member>
+        <member name="T:CommonLibrary.GUI.MessageWindowResult">
+            <summary>
+            Specifies the returned result from the MessageBoxW() C function.
+            </summary>
+        </member>
+        <member name="T:CommonLibrary.GUI.MessageWindowType">
+            <summary>
+             Specifies the type of the <see cref="T:CommonLibrary.GUI.MessageWindow"/>.
+            </summary>
+        </member>
+        <member name="T:CommonLibrary.Interoperability.Win32InteropService">
+            <summary>
+             Wraps and interacts with Win32 API(such as user32.dll, kernel32.dll, gdi32.dll etc...).
+             Holds the P/Invoke logic for compile time switching between managed(High-level C#) and 
+             unmanaged(Low-level C or C++) code.
+             Provides the base C functionality for some of the methods in the library.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.Interoperability.Win32InteropService.__C_METHOD_MessageBoxW__(System.IntPtr,System.String,System.String,System.UInt32)">
+            <summary>
+             Shows classical Windows dialog window with a message, title, and buttons.
+            </summary>
+            <param name="message">
+             The message to display.
+            </param>
+            <param name="title">
+             The title of the dialog window.
+            </param>
+            <param name="windowType">
+             The type of the dialog window.
+            </param>
+            <returns>
+             The result of the dialog window.
+            </returns>
+        </member>
+        <member name="M:CommonLibrary.Interoperability.Win32InteropService.__C_METHOD_printf__(System.String)">
+            <summary>
+             Prints the text in the console.
+            </summary>
+            <param name="text">
+             The text to be printed.
+            </param>
+            <returns>
+             The number of characters printed.
+            </returns>
+        </member>
+        <member name="T:CommonLibrary.IO.Terminal">
+            <summary>
+             Provides low-level console output functionality.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.IO.Terminal.Print(System.String)">
+            <summary>
+             Prints the text to the console.
+            </summary>
+            <param name="text">
+             The text to print to the console.
+            </param>
+            <returns>
+             The number of characters printed to the console.
+            </returns>
+        </member>
+        <member name="T:CommonLibrary.Web.WebBrowser">
+            <summary>
+             Provides cross-platform methods for launching the default web browser of the machine.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.Web.WebBrowser.Open">
+            <summary>
+             Opens the default browser of the machine and navigates to the Google main page.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.Web.WebBrowser.OpenAndNavigate(System.String)">
+            <summary>
+              Opens the default browser of the machine and navigates to the specified URL address.
+              If the URL address is invalid the main page of Google will be loaded on start.
+            </summary>
+            <param name="url">
+             The URL address to navigate to on start.
+            </param>
+        </member>
+        <member name="T:CommonLibrary.WindowsAppManager.WindowsApps">
+            <summary>
+             Provides set of static methods for opening various list of windows applications.
+             All methods of this class runs only on Windows OS.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenCalculator">
+            <summary>
+             Opens the Calculator.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenNotepad">
+            <summary>
+             Opens the Notepad.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenPaint">
+            <summary>
+             Opens Paint.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenSnippingTool">
+            <summary>
+             Opens the Snipping tool for sceenshots.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenTerminal">
+            <summary>
+             Opens the terminal/command propmt
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenPowershell">
+            <summary>
+             Opens the Powershell terminal.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenTaskManager">
+            <summary>
+             Opens the Task Manager.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenControlPanel">
+            <summary>
+             Opens the Control Panel.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenServices">
+            <summary>
+             Opens Services.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenRegistryEditor">
+            <summary>
+             Opens the Registry editor.
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenResourceMonitor">
+            <summary>
+             Opens the Resource Monitor
+            </summary>
+        </member>
+        <member name="M:CommonLibrary.WindowsAppManager.WindowsApps.OpenFileManager(System.String)">
+            <summary>
+             Opens the file manager with at the specified directory.
+            </summary>
+            <param name="path">
+             The directory to open. If not specified, the Desktop directory will load.
+            </param>
+        </member>
+    </members>
+</doc>
