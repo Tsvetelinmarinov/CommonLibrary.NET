@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
 using System.Runtime.Versioning;
 
 namespace CommonLibrary.Interoperability
@@ -33,7 +33,7 @@ namespace CommonLibrary.Interoperability
 
         #endregion
 
-        #region P/Invoke Logic to Win32 APIs
+        #region P/Invoke Locig For Win32 APIs Connection
 
         // SYSLIB1054: Use 'LibraryImportAttribute' instead of 'DllImportAttribute'
         // to generate P/Invoke marshalling code at compile time.
@@ -89,9 +89,13 @@ namespace CommonLibrary.Interoperability
          )]
         private static extern int __C_METHOD_printf__(string text);
 
-#pragma warning restore CA2101 // Specify marshaling for P/Invoke string arguments
-#pragma warning restore SYSLIB1054 // Use 'LibraryImportAttribute' instead of 'DllImportAttribute' 
-        // to generate P/Invoke marshalling code at compile time.
+// Specify marshaling for P/Invoke string arguments
+#pragma warning restore CA2101
+
+// Use 'LibraryImportAttribute' instead of 'DllImportAttribute' 
+// to generate P/Invoke marshalling code at compile time.
+#pragma warning restore SYSLIB1054
+
         #endregion
     }
 }

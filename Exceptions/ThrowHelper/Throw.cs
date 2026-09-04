@@ -43,22 +43,16 @@ namespace CommonLibrary.Exceptions.ExceptionsThrowHelper
         /// </param>
         public static void FileException(string? filePath)
         {
-            // Escape the file path to ensure it is a valid URL format.
-            // If after the escaping the file path is null, empty or whitespace, the file at that
-            // path does not exist, or it is not a well-formed URL, it will throw an exception.
-            filePath = Uri.EscapeDataString(filePath!);
-
+            // If the file path is null, empty or whitespace or the file at that
+            // path does not exist, it will throw an exception.
             if (string.IsNullOrWhiteSpace(filePath))
             {
                 throw new FileException(Errors.FilePathCanNotBeNullOrWhiteSpace);
             }
-            else if (File.Exists(filePath) is false)
+     
+            if (File.Exists(filePath) is false)
             {
                 throw new FileException(Errors.FileDoesNotExists);
-            }
-            else if (Uri.IsWellFormedUriString(filePath, UriKind.RelativeOrAbsolute) is false)
-            {
-                throw new FileException(Errors.FilePathIsNotWellFormedUrl);
             }
         }
 
@@ -67,7 +61,10 @@ namespace CommonLibrary.Exceptions.ExceptionsThrowHelper
         /// </summary>
         public static void IfNotWindows()
         {
-            throw new PlatformNotSupportedException(Errors.OnlyWindowsSupported);
+            if (OperatingSystem.IsWindows() is false)
+            {
+                throw new PlatformNotSupportedException(Errors.OnlyWindowsSupported);
+            }
         }
     }
 }
